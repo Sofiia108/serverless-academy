@@ -1,0 +1,17 @@
+{
+  "name": "03_telegram_console_sender",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "message": "node index.js send-message 'I am your message'",
+    "photo": "node index.js send-photo './assets/Bonnie.jpeg'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^10.0.0",
+    "node-telegram-bot-api": "^0.61.0"
+  }
+}
