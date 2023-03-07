@@ -7,9 +7,18 @@ const openWeatherApiKey = '15126aefbcd21a9cf8de7333a700f264';
 
 function formatWeatherData(data) {
   let message = '';
+  let currentDate = null;
   data.list.forEach((weather, index) => {
+    const date = new Date(weather.dt * 1000);
+    const dayOfWeek = date.toLocaleString('en-US', { weekday: 'long' });
+    const dayOfMonth = date.toLocaleString('en-US', { day: 'numeric' });
+    const month = date.toLocaleString('en-US', { month: 'long' });
+    if (currentDate === null || currentDate !== date.toDateString()) {
+      message += `\n\n📅 ${dayOfWeek}, ${dayOfMonth} ${month}\n`;
+      currentDate = date.toDateString();
+    }
     if (index % 2 === 0) {
-      message += `🕒 ${new Date(weather.dt * 1000).toLocaleString('en-US', { hour: 'numeric', hour12: true })}\n`;
+      message += `🕒 ${date.toLocaleString('en-US', { hour: 'numeric', hour12: true })}\n`;
       message += `🌡️ Temperature: ${weather.main.temp} °C\n`;
       message += `☁️ Weather: ${weather.weather[0].description}\n`;
       message += `💧 Humidity: ${weather.main.humidity}%\n\n`;
